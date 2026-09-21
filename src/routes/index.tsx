@@ -72,6 +72,15 @@ const formattedWorks = [
   },
 ] as const;
 
+const formattedSamples = formattedWorks.flatMap((work, workIndex) =>
+  work.images.map((image, imageIndex) => ({
+    work,
+    workIndex,
+    image,
+    imageIndex,
+  })),
+);
+
 const fullBio = "I’m Madeline Joy, a book services specialist dedicated to helping authors present, promote, and grow their books and author brands. I help authors transform their books into professionally presented, discoverable, and marketable projects through services such as book promotion, book trailers, author websites, author spotlights, editing, proofreading, formatting, SEO, and marketing. I believe every book has a story worth discovering, and my goal is to help more readers discover the books and authors behind them.";
 
 function Portfolio() {
@@ -237,21 +246,28 @@ function Portfolio() {
           <span className="mb-6 grid size-16 place-items-center rounded-full border border-glass-border bg-glass"><selected.icon className="text-primary"/></span>
           <p className="text-xs uppercase tracking-[0.2em] text-gold">{selected.label}</p><h2 id="portfolio-dialog-title" className="mt-2 pr-12 font-display text-4xl sm:text-5xl">{selected.title}</h2>
           {selected.id === "formatted" ? (
-            <div className="mt-8 grid gap-5 sm:grid-cols-2">
-              {formattedWorks.map((work, workIndex) => (
-                <article key={work.title} className="glass-card group overflow-hidden rounded-2xl">
-                  <button className="relative block aspect-[16/10] w-full overflow-hidden bg-glass text-left" onClick={() => setPreview({ workIndex, imageIndex: 0 })} aria-label={`View ${work.title}`}>
-                    <img src={work.images[0]} alt={`${work.title} sample`} loading="lazy" className="h-full w-full object-contain p-3 transition-transform duration-500 group-hover:scale-[1.025]" />
+            <div className="mt-8">
+              <div className="mb-6 flex flex-col gap-2 border-b border-border pb-5 sm:flex-row sm:items-end sm:justify-between">
+                <p className="max-w-2xl text-sm leading-6 text-muted-foreground">Every formatted-book sample from Madeline’s portfolio is displayed below. Select any image for a closer view.</p>
+                <p className="shrink-0 text-xs uppercase tracking-[0.18em] text-gold">{formattedSamples.length} samples · {formattedWorks.length} projects</p>
+              </div>
+              <div className="grid gap-5 sm:grid-cols-2">
+              {formattedSamples.map(({ work, workIndex, image, imageIndex }) => (
+                <article key={`${work.title}-${imageIndex}`} className="glass-card group overflow-hidden rounded-2xl">
+                  <button className="relative block aspect-[16/10] w-full overflow-hidden bg-glass text-left" onClick={() => setPreview({ workIndex, imageIndex })} aria-label={`View ${work.title}, sample ${imageIndex + 1}`}>
+                    <img src={image} alt={`${work.title}, sample ${imageIndex + 1}`} loading="lazy" className="h-full w-full object-contain p-3 transition-transform duration-500 group-hover:scale-[1.025]" />
                     <span className="absolute bottom-3 right-3 grid size-10 place-items-center rounded-full border border-glass-border bg-glass-strong backdrop-blur-xl"><Search size={17}/></span>
                   </button>
                   <div className="p-5 sm:p-6">
                     <p className="text-xs uppercase tracking-[0.18em] text-gold">{work.category}</p>
                     <h3 className="mt-2 font-display text-2xl">{work.title}</h3>
+                    {work.images.length > 1 && <p className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary">Sample {imageIndex + 1} of {work.images.length}</p>}
                     <p className="mt-3 text-sm leading-6 text-muted-foreground">{work.description}</p>
-                    <Button variant="glass" size="sm" className="mt-5" onClick={() => setPreview({ workIndex, imageIndex: 0 })}>View Sample <ArrowRight size={15}/></Button>
+                    <Button variant="glass" size="sm" className="mt-5" onClick={() => setPreview({ workIndex, imageIndex })}>View Sample <ArrowRight size={15}/></Button>
                   </div>
                 </article>
               ))}
+              </div>
             </div>
           ) : (
             <div className="mt-8 grid min-h-64 place-items-center rounded-2xl border border-dashed border-glass-border bg-glass p-8 text-center"><div><Sparkles className="mx-auto mb-4 text-primary"/><h3 className="font-display text-2xl">Portfolio samples coming soon.</h3><p className="mx-auto mt-3 max-w-md text-sm leading-6 text-muted-foreground">Madeline’s real project materials will appear here as they are added. No sample or client work has been fabricated.</p></div></div>
