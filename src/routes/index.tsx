@@ -7,6 +7,11 @@ import {
 } from "lucide-react";
 import { z } from "zod";
 import portraitAsset from "@/assets/madeline-joy.jpg.asset.json";
+import childrensInteriorAsset from "@/assets/cpnc2ztwtsqkz29g4yf4.json";
+import childrensCoverAsset from "@/assets/xev3tjgyx2pehawbk7me.json";
+import kisahAsset from "@/assets/f3jbum3sdg6rjnmkbsl7.json";
+import workbookAsset from "@/assets/ylwmtvhdwkptfmagovhi.json";
+import fantasyAsset from "@/assets/pxb9z7dmruuzi6cingxn.json";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -33,12 +38,39 @@ const services = [
 
 const categories = [
   { id: "trailers", title: "Book Trailers", label: "Motion & Story", icon: Play, index: "01" },
-  { id: "formatted", title: "Formatted Books", label: "Editorial Design", icon: BookOpen, index: "02" },
+  { id: "formatted", title: "Formatted Works", label: "Editorial Design", icon: BookOpen, index: "02" },
   { id: "websites", title: "Author Websites", label: "Digital Presence", icon: Globe2, index: "03" },
   { id: "launch", title: "Book Launch Promotion", label: "Campaigns", icon: Rocket, index: "04" },
   { id: "reviews", title: "Reviews & Reader Feedback", label: "Social Proof", icon: MessageSquareQuote, index: "05" },
 ] as const;
 type Category = (typeof categories)[number];
+
+const formattedWorks = [
+  {
+    title: "Colorful Children’s Book Design",
+    category: "Children’s book cover & interior",
+    description: "A bright, playful presentation with an illustrated cover and a lively chapter-opening spread.",
+    images: [childrensCoverAsset.url, childrensInteriorAsset.url],
+  },
+  {
+    title: "Kisah Seru di Alam",
+    category: "Children’s book cover",
+    description: "A full wraparound illustrated cover for Muhammad Adam’s children’s adventure.",
+    images: [kisahAsset.url],
+  },
+  {
+    title: "Retail Delivery Strategies for Community Banking",
+    category: "Professional workbook design",
+    description: "A structured workbook system pairing a polished cover with clear, practical interior pages.",
+    images: [workbookAsset.url],
+  },
+  {
+    title: "African Fantasy Novel",
+    category: "Fiction interior formatting",
+    description: "A refined chapter-opening treatment designed for an immersive fiction reading experience.",
+    images: [fantasyAsset.url],
+  },
+] as const;
 
 const fullBio = "I’m Madeline Joy, a book services specialist dedicated to helping authors present, promote, and grow their books and author brands. I help authors transform their books into professionally presented, discoverable, and marketable projects through services such as book promotion, book trailers, author websites, author spotlights, editing, proofreading, formatting, SEO, and marketing. I believe every book has a story worth discovering, and my goal is to help more readers discover the books and authors behind them.";
 
@@ -46,6 +78,7 @@ function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [bioOpen, setBioOpen] = useState(false);
   const [selected, setSelected] = useState<Category | null>(null);
+  const [preview, setPreview] = useState<{ workIndex: number; imageIndex: number } | null>(null);
   const [filter, setFilter] = useState("All");
   const [sent, setSent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -53,12 +86,16 @@ function Portfolio() {
 
   useEffect(() => {
     if (!selected) return;
-    const onKey = (event: KeyboardEvent) => event.key === "Escape" && setSelected(null);
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      if (preview) setPreview(null);
+      else setSelected(null);
+    };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     closeRef.current?.focus();
     return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
-  }, [selected]);
+  }, [selected, preview]);
 
   const scrollTo = (id: string) => {
     document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: "smooth" });
@@ -194,14 +231,47 @@ function Portfolio() {
 
       <footer className="relative border-t border-border px-5 py-10"><div className="mx-auto flex max-w-6xl flex-col gap-5 sm:flex-row sm:items-end sm:justify-between"><div><p className="font-display text-2xl">Madeline Joy</p><p className="mt-1 text-sm text-muted-foreground">Helping authors present, promote, and grow their books.</p></div><p className="text-xs text-muted-foreground">© 2026 Madeline Joy. All rights reserved.</p></div></footer>
 
-      {selected && <div role="dialog" aria-modal="true" aria-labelledby="portfolio-dialog-title" className="fixed inset-0 z-50 grid place-items-center bg-ink/80 p-4 backdrop-blur-md" onMouseDown={(event) => event.target === event.currentTarget && setSelected(null)}>
-        <div className="glass-panel animate-in fade-in zoom-in-95 relative w-full max-w-3xl rounded-3xl p-6 duration-300 sm:p-10">
+      {selected && <div role="dialog" aria-modal="true" aria-labelledby="portfolio-dialog-title" className="fixed inset-0 z-50 grid place-items-center bg-ink/80 p-3 backdrop-blur-md sm:p-5" onMouseDown={(event) => event.target === event.currentTarget && setSelected(null)}>
+        <div className={cn("glass-panel animate-in fade-in zoom-in-95 relative w-full overflow-y-auto rounded-3xl p-6 duration-300 sm:p-10", selected.id === "formatted" ? "max-h-[92svh] max-w-6xl" : "max-w-3xl")}>
           <Button ref={closeRef} variant="icon" size="icon" className="absolute right-4 top-4" onClick={() => setSelected(null)} aria-label="Close portfolio"><X size={20}/></Button>
           <span className="mb-6 grid size-16 place-items-center rounded-full border border-glass-border bg-glass"><selected.icon className="text-primary"/></span>
           <p className="text-xs uppercase tracking-[0.2em] text-gold">{selected.label}</p><h2 id="portfolio-dialog-title" className="mt-2 pr-12 font-display text-4xl sm:text-5xl">{selected.title}</h2>
-          <div className="mt-8 grid min-h-64 place-items-center rounded-2xl border border-dashed border-glass-border bg-glass p-8 text-center"><div><Sparkles className="mx-auto mb-4 text-primary"/><h3 className="font-display text-2xl">Portfolio samples coming soon.</h3><p className="mx-auto mt-3 max-w-md text-sm leading-6 text-muted-foreground">Madeline’s real project materials will appear here as they are added. No sample or client work has been fabricated.</p></div></div>
+          {selected.id === "formatted" ? (
+            <div className="mt-8 grid gap-5 sm:grid-cols-2">
+              {formattedWorks.map((work, workIndex) => (
+                <article key={work.title} className="glass-card group overflow-hidden rounded-2xl">
+                  <button className="relative block aspect-[16/10] w-full overflow-hidden bg-glass text-left" onClick={() => setPreview({ workIndex, imageIndex: 0 })} aria-label={`View ${work.title}`}>
+                    <img src={work.images[0]} alt={`${work.title} sample`} loading="lazy" className="h-full w-full object-contain p-3 transition-transform duration-500 group-hover:scale-[1.025]" />
+                    <span className="absolute bottom-3 right-3 grid size-10 place-items-center rounded-full border border-glass-border bg-glass-strong backdrop-blur-xl"><Search size={17}/></span>
+                  </button>
+                  <div className="p-5 sm:p-6">
+                    <p className="text-xs uppercase tracking-[0.18em] text-gold">{work.category}</p>
+                    <h3 className="mt-2 font-display text-2xl">{work.title}</h3>
+                    <p className="mt-3 text-sm leading-6 text-muted-foreground">{work.description}</p>
+                    <Button variant="glass" size="sm" className="mt-5" onClick={() => setPreview({ workIndex, imageIndex: 0 })}>View Sample <ArrowRight size={15}/></Button>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="mt-8 grid min-h-64 place-items-center rounded-2xl border border-dashed border-glass-border bg-glass p-8 text-center"><div><Sparkles className="mx-auto mb-4 text-primary"/><h3 className="font-display text-2xl">Portfolio samples coming soon.</h3><p className="mx-auto mt-3 max-w-md text-sm leading-6 text-muted-foreground">Madeline’s real project materials will appear here as they are added. No sample or client work has been fabricated.</p></div></div>
+          )}
         </div>
       </div>}
+      {preview && (() => {
+        const work = formattedWorks[preview.workIndex];
+        if (!work) return null;
+        return <div role="dialog" aria-modal="true" aria-label={`${work.title} image preview`} className="fixed inset-0 z-[60] grid place-items-center bg-ink/90 p-3 backdrop-blur-xl" onMouseDown={(event) => event.target === event.currentTarget && setPreview(null)}>
+          <div className="relative flex max-h-[94svh] w-full max-w-6xl flex-col items-center">
+            <Button variant="icon" size="icon" className="absolute right-2 top-2 z-10 border border-glass-border bg-glass-strong" onClick={() => setPreview(null)} aria-label="Close image preview"><X size={20}/></Button>
+            <img src={work.images[preview.imageIndex]} alt={`${work.title}, view ${preview.imageIndex + 1}`} className="max-h-[78svh] w-full rounded-2xl object-contain" />
+            <div className="glass-panel mt-3 flex w-full max-w-3xl items-center justify-between gap-4 rounded-2xl px-4 py-3">
+              <div className="min-w-0"><p className="truncate font-display text-lg">{work.title}</p><p className="text-xs text-muted-foreground">View {preview.imageIndex + 1} of {work.images.length}</p></div>
+              {work.images.length > 1 && <div className="flex shrink-0 gap-2">{work.images.map((image, imageIndex) => <button key={image} onClick={() => setPreview({ workIndex: preview.workIndex, imageIndex })} className={cn("size-12 overflow-hidden rounded-lg border", imageIndex === preview.imageIndex ? "border-primary" : "border-glass-border")} aria-label={`Show view ${imageIndex + 1}`}><img src={image} alt="" className="h-full w-full object-cover"/></button>)}</div>}
+            </div>
+          </div>
+        </div>;
+      })()}
     </main>
   );
 }
