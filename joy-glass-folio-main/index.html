@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Madeline Joy — Book Marketing & Author Services Specialist</title>
+  <meta name="description" content="Madeline Joy helps authors present, promote, and grow their books through thoughtful marketing, trailers, websites, editing, formatting, SEO, and launch support.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #140b19;
+      --fg: #f5f2eb;
+      --card-bg: rgba(45, 25, 52, 0.65);
+      --glass: rgba(255, 255, 255, 0.07);
+      --glass-strong: rgba(255, 255, 255, 0.13);
+      --glass-border: rgba(255, 255, 255, 0.15);
+      --glass-highlight: rgba(220, 160, 100, 0.45);
+      --primary: #df8a6c;
+      --primary-hover: #e89e83;
+      --gold: #dcb370;
+      --rose: #c85a7e;
+      --muted: #a89aa9;
+      --ink: #0d0611;
+      --border: rgba(255, 255, 255, 0.12);
+      --font-sans: 'DM Sans', sans-serif;
+      --font-display: 'Playfair Display', serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    ::selection { background: var(--primary); color: #fff; }
+    .font-display { font-family: var(--font-display); }
+    .glass-panel {
+      background: linear-gradient(145deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));
+      border: 1px solid var(--glass-border);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 24px 80px rgba(0,0,0,0.5);
+      backdrop-filter: blur(24px) saturate(135%);
+      -webkit-backdrop-filter: blur(24px);
+    }
+    .glass-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      border: 1px solid var(--glass-border);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 20px 60px rgba(0,0,0,0.35);
+      backdrop-filter: blur(20px) saturate(130%);
+      -webkit-backdrop-filter: blur(20px);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .glass-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--glass-highlight);
+    }
+    .ambient-orb-1 {
+      position: fixed; left: -10rem; top: 4rem; width: 32rem; height: 32rem; border-radius: 50%;
+      background: rgba(200, 90, 126, 0.16); filter: blur(80px); pointer-events: none; z-index: 0;
+      animation: drift-a 16s ease-in-out infinite;
+    }
+    .ambient-orb-2 {
+      position: fixed; right: -10rem; top: 30rem; width: 36rem; height: 36rem; border-radius: 50%;
+      background: rgba(220, 179, 112, 0.12); filter: blur(90px); pointer-events: none; z-index: 0;
+      animation: drift-b 20s ease-in-out infinite;
+    }
+    .grid-bg {
+      position: fixed; inset: 0; opacity: 0.25; pointer-events: none; z-index: 0;
+      background-image: linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, transparent, black 20%, black 75%, transparent);
+      -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 75%, transparent);
+    }
+    @keyframes drift-a { 0%,100%{transform:translate3d(0,0,0)} 50%{transform:translate3d(3rem,2rem,0)} }
+    @keyframes drift-b { 0%,100%{transform:translate3d(0,0,0)} 50%{transform:translate3d(-2rem,3rem,0)} }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .gentle-float { animation: float 6s ease-in-out infinite; }
+    
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.75rem 1.5rem; border-radius: 9999px; font-weight: 500; font-size: 0.95rem;
+      cursor: pointer; text-decoration: none; transition: all 0.25s ease; border: none; outline: none;
+    }
+    .btn-primary { background: var(--primary); color: #140b19; font-weight: 600; }
+    .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 10px 25px rgba(223, 138, 108, 0.3); }
+    .btn-glass {
+      background: var(--glass); color: var(--fg); border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    }
+    .btn-glass:hover { background: var(--glass-strong); border-color: rgba(255,255,255,0.3); }
+    .btn-sm { padding: 0.45rem 1rem; font-size: 0.85rem; }
+    
+    .badge-gold { color: var(--gold); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.2em; font-weight: 600; }
+    
+    /* Layout */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 10; }
+    section { padding: 6rem 0; scroll-margin-top: 5rem; }
+    
+    /* Modal & Lightbox */
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(13, 6, 17, 0.85); backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px); z-index: 100; display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    .modal-backdrop.active { opacity: 1; pointer-events: auto; }
+    .modal-content {
+      max-height: 90vh; width: 100%; max-width: 1100px; overflow-y: auto; border-radius: 2rem;
+      padding: 2.5rem; transform: scale(0.95); transition: transform 0.3s ease;
+    }
+    .modal-backdrop.active .modal-content { transform: scale(1); }
+    
+    .lightbox-backdrop {
+      position: fixed; inset: 0; background: rgba(8, 3, 11, 0.94); backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px); z-index: 200; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 1.5rem; opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox-backdrop.active { opacity: 1; pointer-events: auto; }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
+  </style>
+</head>
+<body>
+  <div class="ambient-orb-1"></div>
+  <div class="ambient-orb-2"></div>
+  <div class="grid-bg"></div>
+
+  <!-- Navigation -->
+  <header style="position: fixed; top: 1rem; left: 0; right: 0; z-index: 50; padding: 0 1rem;">
+    <nav class="glass-panel" style="max-width: 1100px; margin: 0 auto; border-radius: 9999px; padding: 0.75rem 1.75rem; display: flex; align-items: center; justify-content: space-between;">
+      <a href="#home" style="color: var(--fg); text-decoration: none; font-size: 1.25rem; font-weight: 600;" class="font-display">Madeline Joy</a>
+      <div style="display: flex; gap: 0.5rem; align-items: center;">
+        <a href="#home" class="btn btn-glass btn-sm">Home</a>
+        <a href="#about" class="btn btn-glass btn-sm">About</a>
+        <a href="#services" class="btn btn-glass btn-sm">Services</a>
+        <a href="#portfolio" class="btn btn-glass btn-sm">Portfolio</a>
+        <a href="#process" class="btn btn-glass btn-sm">Process</a>
+        <a href="#contact" class="btn btn-primary btn-sm">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" style="padding-top: 10rem; min-height: 90vh; display: flex; align-items: center;">
+    <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3.5rem; align-items: center;">
+      <div class="gentle-float" style="max-width: 440px; margin: 0 auto; position: relative;">
+        <div class="glass-panel" style="border-radius: 2rem; padding: 1rem; position: relative;">
+          <div style="position: absolute; right: -1rem; top: 2.5rem; z-index: 10; border-radius: 9999px; border: 1px solid var(--glass-border); background: var(--glass-strong); padding: 0.4rem 1rem; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; backdrop-filter: blur(12px);">Books • Brands • Beyond</div>
+          <img src="./images/madeline-joy.jpg" onerror="this.src='https://cea9a82b-7510-41be-8ff3-bd03d846d7b1.lovableproject.com/__l5e/assets-v1/0977be83-0975-4a4a-8545-03c035636a2b/madeline-joy.jpg'" alt="Madeline Joy, book marketing and author-services specialist" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 1.5rem;">
+          <div style="position: absolute; bottom: 2rem; left: 2rem; right: 2rem; border-radius: 1rem; border: 1px solid var(--glass-border); background: rgba(13,6,17,0.7); padding: 0.75rem 1rem; backdrop-filter: blur(16px);">
+            <p class="badge-gold" style="font-size: 0.7rem;">Creative partner for authors</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="badge-gold" style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+          <span style="display: inline-block; width: 2.5rem; height: 1px; background: var(--gold);"></span>
+          Book Marketing & Author Services
+        </p>
+        <h1 class="font-display" style="font-size: clamp(3rem, 6vw, 5.5rem); line-height: 1; font-weight: 500; margin-bottom: 1.5rem;">
+          Madeline <br><span style="font-style: italic; color: var(--primary);">Joy</span>
+        </h1>
+        <p style="font-size: 1.15rem; color: var(--muted); max-width: 540px; margin-bottom: 2rem; line-height: 1.8;">
+          I’m Madeline Joy, a book services specialist helping authors present, promote, and grow their books. I specialize in book promotion, book trailers, author websites, author spotlights, editing, proofreading, formatting, SEO, and book marketing.
+        </p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="#portfolio" class="btn btn-primary">Explore My Work →</a>
+          <button onclick="openFormattedModal()" class="btn btn-glass">View Formatted Books (30 Works)</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; align-items: center;">
+        <div class="glass-card" style="border-radius: 2rem; padding: 1rem;">
+          <img src="./images/madeline-joy.jpg" onerror="this.src='https://cea9a82b-7510-41be-8ff3-bd03d846d7b1.lovableproject.com/__l5e/assets-v1/0977be83-0975-4a4a-8545-03c035636a2b/madeline-joy.jpg'" alt="Madeline Joy in her creative workspace" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 1.5rem;">
+        </div>
+        <div class="glass-panel" style="border-radius: 2rem; padding: 2.5rem 3rem;">
+          <p class="badge-gold" style="margin-bottom: 0.75rem;">The person behind the pages</p>
+          <p class="font-display" style="font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.4; margin-bottom: 1.5rem;">
+            “Every book has a story worth discovering. My work is to help the right readers find it.”
+          </p>
+          <div style="height: 1px; background: var(--border); margin: 1.5rem 0;"></div>
+          <p style="color: var(--muted); line-height: 1.8; margin-bottom: 1rem;">
+            I bring editorial care and marketing clarity together, helping authors move from manuscript to a polished, discoverable presence.
+          </p>
+          <p style="color: var(--muted); line-height: 1.8;">
+            I help authors transform their books into professionally presented, discoverable, and marketable projects through services such as book promotion, book trailers, author websites, author spotlights, editing, proofreading, formatting, SEO, and marketing.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services">
+    <div class="container">
+      <div style="max-width: 650px; margin-bottom: 3rem;">
+        <p class="badge-gold" style="margin-bottom: 0.5rem;">What I Do</p>
+        <h2 class="font-display" style="font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.2;">Everything your book needs to meet its readers.</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem;">
+        
+          <div class="glass-card" style="border-radius: 1.25rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--primary); font-size: 1.2rem;">✦</span>
+              <span style="color: var(--muted); font-size: 0.8rem; font-family: var(--font-sans);">01</span>
+            </div>
+            <h3 class="font-display" style="font-size: 1.2rem; font-weight: 500;">Book Promotion</h3>
+          </div>
+        
+          <div class="glass-card" style="border-radius: 1.25rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--primary); font-size: 1.2rem;">✦</span>
+              <span style="color: var(--muted); font-size: 0.8rem; font-family: var(--font-sans);">02</span>
+            </div>
+            <h3 class="font-display" style="font-size: 1.2rem; font-weight: 500;">Book Trailers</h3>
+          </div>
+        
+          <div class="glass-card" style="border-radius: 1.25rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--primary); font-size: 1.2rem;">✦</span>
+              <span style="color: var(--muted); font-size: 0.8rem; font-family: var(--font-sans);">03</span>
+            </div>
+            <h3 class="font-display" style="font-size: 1.2rem; font-weight: 500;">Author Websites</h3>
+          </div>
+        
+          <div class="glass-card" style="border-radius: 1.25rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--primary); font-size: 1.2rem;">✦</span>
+              <span style="color: var(--muted); font-size: 0.8rem; font-family: var(--font-sans);">04</span>
+            </div>
+            <h3 class="font-display" style="font-size: 1.2rem; font-weight: 500;">Author Spotlights</h3>
+          </div>
+        
+          <div class="glass-card" style="border-radius: 1.25rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--primary); font-size: 1.2rem;">✦</span>
+              <span style="color: var(--muted); font-size: 0.8rem; font-family: var(--font-sans);">05</span>
+            </div>
+            <h3 class="font-display" style="font-size: 1.2rem; font-weight: 500;">Book Editing</h3>
+          </div>
+        
+          <div class="glass-card" style="border-radius: 1.25rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--primary); font-size: 1.2rem;">✦</span>
+              <span style="color: var(--muted); font-size: 0.8rem; font-family: var(--font-sans);">06</span>
+            </div>
+            <h3 class="font-display" style="font-size: 1.2rem; font-weight: 500;">Book Proofreading</h3>
+          </div>
+        
+          <div class="glass-card" style="border-radius: 1.25rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--primary); font-size: 1.2rem;">✦</span>
+              <span style="color: var(--muted); font-size: 0.8rem; font-family: var(--font-sans);">07</span>
+            </div>
+            <h3 class="font-display" style="font-size: 1.2rem; font-weight: 500;">Book Formatting</h3>
+          </div>
+        
+          <div class="glass-card" style="border-radius: 1.25rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--primary); font-size: 1.2rem;">✦</span>
+              <span style="color: var(--muted); font-size: 0.8rem; font-family: var(--font-sans);">08</span>
+            </div>
+            <h3 class="font-display" style="font-size: 1.2rem; font-weight: 500;">Book Marketing</h3>
+          </div>
+        
+          <div class="glass-card" style="border-radius: 1.25rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--primary); font-size: 1.2rem;">✦</span>
+              <span style="color: var(--muted); font-size: 0.8rem; font-family: var(--font-sans);">09</span>
+            </div>
+            <h3 class="font-display" style="font-size: 1.2rem; font-weight: 500;">Book Launch Promotion</h3>
+          </div>
+        
+          <div class="glass-card" style="border-radius: 1.25rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--primary); font-size: 1.2rem;">✦</span>
+              <span style="color: var(--muted); font-size: 0.8rem; font-family: var(--font-sans);">10</span>
+            </div>
+            <h3 class="font-display" style="font-size: 1.2rem; font-weight: 500;">Book SEO & Discoverability</h3>
+          </div>
+        
+          <div class="glass-card" style="border-radius: 1.25rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--primary); font-size: 1.2rem;">✦</span>
+              <span style="color: var(--muted); font-size: 0.8rem; font-family: var(--font-sans);">11</span>
+            </div>
+            <h3 class="font-display" style="font-size: 1.2rem; font-weight: 500;">Author Branding</h3>
+          </div>
+        
+          <div class="glass-card" style="border-radius: 1.25rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--primary); font-size: 1.2rem;">✦</span>
+              <span style="color: var(--muted); font-size: 0.8rem; font-family: var(--font-sans);">12</span>
+            </div>
+            <h3 class="font-display" style="font-size: 1.2rem; font-weight: 500;">Promotional Graphics</h3>
+          </div>
+        
+          <div class="glass-card" style="border-radius: 1.25rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--primary); font-size: 1.2rem;">✦</span>
+              <span style="color: var(--muted); font-size: 0.8rem; font-family: var(--font-sans);">13</span>
+            </div>
+            <h3 class="font-display" style="font-size: 1.2rem; font-weight: 500;">Book Descriptions & Marketing Copy</h3>
+          </div>
+        
+          <div class="glass-card" style="border-radius: 1.25rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--primary); font-size: 1.2rem;">✦</span>
+              <span style="color: var(--muted); font-size: 0.8rem; font-family: var(--font-sans);">14</span>
+            </div>
+            <h3 class="font-display" style="font-size: 1.2rem; font-weight: 500;">Social Media Book Promotion</h3>
+          </div>
+        
+          <div class="glass-card" style="border-radius: 1.25rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--primary); font-size: 1.2rem;">✦</span>
+              <span style="color: var(--muted); font-size: 0.8rem; font-family: var(--font-sans);">15</span>
+            </div>
+            <h3 class="font-display" style="font-size: 1.2rem; font-weight: 500;">Book Landing Pages</h3>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio">
+    <div class="container">
+      <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 3rem;">
+        <p class="badge-gold">Selected disciplines</p>
+        <h2 class="font-display" style="font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.2;">Explore My Work</h2>
+        <p style="color: var(--muted); max-width: 600px;">A growing archive of real author projects. Choose a category or browse all 30 formatted book projects directly.</p>
+      </div>
+
+      <!-- Categories -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
+        <div onclick="openFormattedModal()" class="glass-card" style="border-radius: 1.75rem; padding: 2rem; cursor: pointer; border-color: var(--primary);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3rem;">
+            <span style="display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass); color: var(--primary); font-size: 1.5rem;">📖</span>
+            <span class="font-display" style="font-size: 2.5rem; color: rgba(255,255,255,0.15);">01</span>
+          </div>
+          <div>
+            <p class="badge-gold" style="margin-bottom: 0.5rem;">Editorial Design • 30 Real Works</p>
+            <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+              <h3 class="font-display" style="font-size: 2rem;">Formatted Works</h3>
+              <span style="color: var(--primary); font-size: 1.5rem;">→</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card" style="border-radius: 1.75rem; padding: 2rem; opacity: 0.8;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3rem;">
+            <span style="display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass); color: var(--primary); font-size: 1.5rem;">🎬</span>
+            <span class="font-display" style="font-size: 2.5rem; color: rgba(255,255,255,0.15);">02</span>
+          </div>
+          <div>
+            <p class="badge-gold" style="margin-bottom: 0.5rem;">Motion & Story</p>
+            <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+              <h3 class="font-display" style="font-size: 2rem;">Book Trailers</h3>
+              <span style="color: var(--muted); font-size: 1rem;">Coming Soon</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card" style="border-radius: 1.75rem; padding: 2rem; opacity: 0.8;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3rem;">
+            <span style="display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass); color: var(--primary); font-size: 1.5rem;">🌐</span>
+            <span class="font-display" style="font-size: 2.5rem; color: rgba(255,255,255,0.15);">03</span>
+          </div>
+          <div>
+            <p class="badge-gold" style="margin-bottom: 0.5rem;">Digital Presence</p>
+            <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+              <h3 class="font-display" style="font-size: 2rem;">Author Websites</h3>
+              <span style="color: var(--muted); font-size: 1rem;">Coming Soon</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card" style="border-radius: 1.75rem; padding: 2rem; opacity: 0.8;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3rem;">
+            <span style="display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass); color: var(--primary); font-size: 1.5rem;">🚀</span>
+            <span class="font-display" style="font-size: 2.5rem; color: rgba(255,255,255,0.15);">04</span>
+          </div>
+          <div>
+            <p class="badge-gold" style="margin-bottom: 0.5rem;">Campaigns</p>
+            <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+              <h3 class="font-display" style="font-size: 2rem;">Book Launch Promotion</h3>
+              <span style="color: var(--muted); font-size: 1rem;">Coming Soon</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card" style="border-radius: 1.75rem; padding: 2rem; opacity: 0.8;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3rem;">
+            <span style="display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass); color: var(--primary); font-size: 1.5rem;">💬</span>
+            <span class="font-display" style="font-size: 2.5rem; color: rgba(255,255,255,0.15);">05</span>
+          </div>
+          <div>
+            <p class="badge-gold" style="margin-bottom: 0.5rem;">Social Proof</p>
+            <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+              <h3 class="font-display" style="font-size: 2rem;">Reviews & Feedback</h3>
+              <span style="color: var(--muted); font-size: 1rem;">Coming Soon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Formatted Books Showcase Gallery directly on page -->
+      <div style="margin-top: 4rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <p class="badge-gold">Live Archive</p>
+            <h3 class="font-display" style="font-size: 2rem;">All 30 Formatted Works</h3>
+          </div>
+          <p class="badge-gold" style="font-size: 0.8rem;">31 SAMPLES • 30 PROJECTS</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem;" id="portfolio-grid">
+          <!-- Rendered dynamically by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section id="process">
+    <div class="container">
+      <div style="max-width: 600px; margin-bottom: 3rem;">
+        <p class="badge-gold">My Process</p>
+        <h2 class="font-display" style="font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.2;">From first idea to polished presence.</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
+        <div class="glass-card" style="border-radius: 1.5rem; padding: 2rem;">
+          <span class="font-display" style="font-size: 3rem; color: rgba(223,138,108,0.7);">01</span>
+          <div style="height: 1px; background: var(--border); margin: 1.5rem 0;"></div>
+          <h3 class="font-display" style="font-size: 1.4rem; margin-bottom: 0.5rem;">Discover</h3>
+          <p style="color: var(--muted); font-size: 0.9rem;">Understand the author’s book, audience, and publishing goals.</p>
+        </div>
+        <div class="glass-card" style="border-radius: 1.5rem; padding: 2rem;">
+          <span class="font-display" style="font-size: 3rem; color: rgba(223,138,108,0.7);">02</span>
+          <div style="height: 1px; background: var(--border); margin: 1.5rem 0;"></div>
+          <h3 class="font-display" style="font-size: 1.4rem; margin-bottom: 0.5rem;">Plan</h3>
+          <p style="color: var(--muted); font-size: 0.9rem;">Identify the right formatting standards, layout grids, and creative direction.</p>
+        </div>
+        <div class="glass-card" style="border-radius: 1.5rem; padding: 2rem;">
+          <span class="font-display" style="font-size: 3rem; color: rgba(223,138,108,0.7);">03</span>
+          <div style="height: 1px; background: var(--border); margin: 1.5rem 0;"></div>
+          <h3 class="font-display" style="font-size: 1.4rem; margin-bottom: 0.5rem;">Create</h3>
+          <p style="color: var(--muted); font-size: 0.9rem;">Develop the promotional, editorial, formatting, or web materials.</p>
+        </div>
+        <div class="glass-card" style="border-radius: 1.5rem; padding: 2rem;">
+          <span class="font-display" style="font-size: 3rem; color: rgba(223,138,108,0.7);">04</span>
+          <div style="height: 1px; background: var(--border); margin: 1.5rem 0;"></div>
+          <h3 class="font-display" style="font-size: 1.4rem; margin-bottom: 0.5rem;">Present</h3>
+          <p style="color: var(--muted); font-size: 0.9rem;">Deliver print-ready, polished materials designed to help authors succeed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <div class="glass-panel" style="border-radius: 2rem; padding: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem;">
+        <div>
+          <p class="badge-gold" style="margin-bottom: 0.5rem;">Start a conversation</p>
+          <h2 class="font-display" style="font-size: clamp(2rem, 3.5vw, 2.75rem); line-height: 1.2; margin-bottom: 1.5rem;">Let’s Talk About Your Book</h2>
+          <p style="color: var(--muted); line-height: 1.8; margin-bottom: 1.5rem;">Your book deserves a presentation as considered as the writing itself. Share a few details and I’ll be ready to understand the support you need.</p>
+        </div>
+        <form onsubmit="handleContact(event)" style="display: grid; gap: 1.25rem;">
+          <input type="text" placeholder="Your Name" required style="width: 100%; padding: 0.85rem 1.25rem; border-radius: 0.75rem; border: 1px solid var(--glass-border); background: var(--glass); color: var(--fg); outline: none;">
+          <input type="email" placeholder="Your Email" required style="width: 100%; padding: 0.85rem 1.25rem; border-radius: 0.75rem; border: 1px solid var(--glass-border); background: var(--glass); color: var(--fg); outline: none;">
+          <input type="text" placeholder="Book Title" style="width: 100%; padding: 0.85rem 1.25rem; border-radius: 0.75rem; border: 1px solid var(--glass-border); background: var(--glass); color: var(--fg); outline: none;">
+          <textarea rows="4" placeholder="Tell me about your book, goals, and timeline…" required style="width: 100%; padding: 0.85rem 1.25rem; border-radius: 0.75rem; border: 1px solid var(--glass-border); background: var(--glass); color: var(--fg); outline: none;"></textarea>
+          <button type="submit" class="btn btn-primary" style="justify-self: start;">Let’s Talk About Your Book →</button>
+          <p id="contact-success" style="display: none; color: var(--gold); font-size: 0.9rem;">Thank you! Your message has been prepared.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid var(--border); padding: 3rem 0; margin-top: 4rem;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <p class="font-display" style="font-size: 1.5rem;">Madeline Joy</p>
+        <p style="color: var(--muted); font-size: 0.85rem;">Helping authors present, promote, and grow their books.</p>
+      </div>
+      <p style="color: var(--muted); font-size: 0.85rem;">© 2026 Madeline Joy. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Formatted Works Modal -->
+  <div id="formatted-modal" class="modal-backdrop" onclick="if(event.target===this) closeFormattedModal()">
+    <div class="glass-panel modal-content">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem;">
+        <div>
+          <span style="display: inline-grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass); color: var(--primary); font-size: 1.5rem; margin-bottom: 1rem;">📖</span>
+          <p class="badge-gold">Editorial Design Archive</p>
+          <h2 class="font-display" style="font-size: clamp(2rem, 3.5vw, 3rem);">Formatted Works</h2>
+          <p style="color: var(--muted); margin-top: 0.5rem; font-size: 0.95rem;">All 30 authentic projects from Madeline’s Contra portfolio. Select any card for full-screen inspection.</p>
+        </div>
+        <button onclick="closeFormattedModal()" class="btn btn-glass btn-sm" style="font-size: 1.2rem; border-radius: 50%; width: 2.5rem; height: 2.5rem; padding: 0;">✕</button>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;" id="modal-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Fullscreen Lightbox Preview -->
+  <div id="lightbox" class="lightbox-backdrop" onclick="if(event.target===this) closeLightbox()">
+    <button onclick="closeLightbox()" class="btn btn-glass" style="position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.25rem; border-radius: 50%; width: 3rem; height: 3rem; padding: 0; z-index: 210;">✕</button>
+    <div style="max-width: 90vw; max-height: 80vh; display: flex; align-items: center; justify-content: center; position: relative;">
+      <img id="lightbox-img" src="" alt="" style="max-width: 100%; max-height: 78vh; object-fit: contain; border-radius: 1rem; box-shadow: 0 25px 80px rgba(0,0,0,0.8);">
+    </div>
+    <div class="glass-panel" style="margin-top: 1rem; border-radius: 1.25rem; padding: 0.75rem 1.5rem; display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 700px; gap: 1rem;">
+      <div>
+        <p id="lightbox-title" class="font-display" style="font-size: 1.15rem; font-weight: 500;"></p>
+        <p id="lightbox-counter" style="color: var(--muted); font-size: 0.75rem;"></p>
+      </div>
+      <div id="lightbox-thumbnails" style="display: flex; gap: 0.5rem;"></div>
+    </div>
+  </div>
+
+  <script>
+    const formattedWorks = [
+  {
+    "title": "Colorful Children’s Book Design",
+    "category": "Children’s book cover & interior",
+    "description": "A bright, playful presentation with an illustrated cover and a lively chapter-opening spread.",
+    "images": [
+      "./images/formatted/xev3tjgyx2pehawbk7me.jpg",
+      "./images/formatted/cpnc2ztwtsqkz29g4yf4.jpg"
+    ]
+  },
+  {
+    "title": "Kisah Seru di Alam",
+    "category": "Children’s book cover",
+    "description": "A full wraparound illustrated cover for Muhammad Adam’s children’s adventure.",
+    "images": [
+      "./images/formatted/f3jbum3sdg6rjnmkbsl7.jpg"
+    ]
+  },
+  {
+    "title": "Retail Delivery Strategies for Community Banking",
+    "category": "Professional workbook design",
+    "description": "A structured workbook system pairing a polished cover with clear, practical interior pages.",
+    "images": [
+      "./images/formatted/ylwmtvhdwkptfmagovhi.jpg"
+    ]
+  },
+  {
+    "title": "African Fantasy Novel",
+    "category": "Fiction interior formatting",
+    "description": "A refined chapter-opening treatment designed for an immersive fiction reading experience.",
+    "images": [
+      "./images/formatted/pxb9z7dmruuzi6cingxn.jpg"
+    ]
+  },
+  {
+    "title": "Journal Design & Layout – One Line A Day",
+    "category": "Journal interior layout",
+    "description": "Structured daily journal interior formatting designed for young professionals, featuring clean typography and minimal prompt grids.",
+    "images": [
+      "./images/formatted/ksbc26rawhsxn1kb8btz.jpg"
+    ]
+  },
+  {
+    "title": "Travel & Lifestyle Non-Fiction Interior",
+    "category": "Non-fiction interior formatting",
+    "description": "Editorial interior layout pairing photography and narrative spreads for a rich lifestyle non-fiction reading experience.",
+    "images": [
+      "./images/formatted/rdphyxvntmrg0ugnmbqr.jpg"
+    ]
+  },
+  {
+    "title": "Detach to Advance",
+    "category": "Full book cover design",
+    "description": "Full wraparound cover design and typography for Jose O. Limardo Jr.’s personal growth book.",
+    "images": [
+      "./images/formatted/tvgiplhetkrqoizaweju.jpg"
+    ]
+  },
+  {
+    "title": "The 21-Day Meditation Program",
+    "category": "Full book cover design",
+    "description": "Full book cover presentation created for Francisco Perez’s meditation and mindfulness program.",
+    "images": [
+      "./images/formatted/g285fsedoyn3zqzkzqhi.jpg"
+    ]
+  },
+  {
+    "title": "Quiet Places with God",
+    "category": "Devotional book design",
+    "description": "Clean, peaceful devotional book cover and layout designed for daily prayer and reflection.",
+    "images": [
+      "./images/formatted/thvgnaj38zc8knwmc2hb.jpg"
+    ]
+  },
+  {
+    "title": "Self-Help Book on Willpower",
+    "category": "Self-help interior formatting",
+    "description": "Modern interior layout and chapter formatting designed for a focused, readable self-help book on building willpower.",
+    "images": [
+      "./images/formatted/wruytq2ihzr69t2izt6d.jpg"
+    ]
+  },
+  {
+    "title": "Get A Life James!",
+    "category": "Full book design & formatting",
+    "description": "Full book design and typography for Alan Denman’s engaging narrative work.",
+    "images": [
+      "./images/formatted/uy9klzbnmkujoksc1obg.jpg"
+    ]
+  },
+  {
+    "title": "Dark Fantasy Book Layout – Minotaur's Challenge",
+    "category": "Fantasy interior formatting",
+    "description": "Atmospheric dark fantasy interior chapter formatting and ornamental headers set in an ancient maze.",
+    "images": [
+      "./images/formatted/gtdjfdjnduynzohir5p0.jpg"
+    ]
+  },
+  {
+    "title": "Illustrated Fantasy Book Interior",
+    "category": "Illustrated fiction formatting",
+    "description": "Immersive fantasy interior layout balancing illustrative artwork with stylized chapter openings.",
+    "images": [
+      "./images/formatted/ybs9lb8y9atxzxj86ktt.jpg"
+    ]
+  },
+  {
+    "title": "Poetry Book Interior – Moon Poetry",
+    "category": "Poetry interior layout",
+    "description": "Delicate, contemplative layout with custom typography and balanced whitespace crafted for poetry collections.",
+    "images": [
+      "./images/formatted/rnni5i5gourbl4swxnhg.jpg"
+    ]
+  },
+  {
+    "title": "Bold Non-Fiction Chapter Layout",
+    "category": "Non-fiction interior formatting",
+    "description": "High-impact non-fiction chapter layout featuring strong headline hierarchy, callout boxes, and readable body text.",
+    "images": [
+      "./images/formatted/px9bgmgosjcbf3ay9atu.jpg"
+    ]
+  },
+  {
+    "title": "The Path of Faith",
+    "category": "Book cover design",
+    "description": "Elegant, uplifting book cover design and typography created for Sarah Thompson.",
+    "images": [
+      "./images/formatted/jnbra1ttucigon6wvzlo.jpg"
+    ]
+  },
+  {
+    "title": "Full Magazine Layout – Edmonton Journal",
+    "category": "Editorial publication layout",
+    "description": "Multi-column editorial magazine spread layout with refined typography and feature story treatment.",
+    "images": [
+      "./images/formatted/dzzf4h6cjbg1pqrtstpk.jpg"
+    ]
+  },
+  {
+    "title": "Luxury Restaurant Menu Layout – NOMO",
+    "category": "Editorial layout & typography",
+    "description": "Sophisticated print menu layout featuring curated typography and structured dish groupings.",
+    "images": [
+      "./images/formatted/coeyfmja8k3itloatrgr.jpg"
+    ]
+  },
+  {
+    "title": "Floral Prayer Book Interior",
+    "category": "Prayer book formatting",
+    "description": "Intricate floral framing and devotional chapter styling created for a spiritual prayer book.",
+    "images": [
+      "./images/formatted/fnak8iobtbgllu9o1uvw.jpg"
+    ]
+  },
+  {
+    "title": "Minimalist Black & Gold Book Interior",
+    "category": "KDP interior formatting",
+    "description": "Minimalist black-and-white interior with elegant gold chapter accents. Clean, distraction-free layout ideal for self-help and business books on KDP.",
+    "images": [
+      "./images/formatted/a43s0kurbsuwvcaiwxgl.jpg"
+    ]
+  },
+  {
+    "title": "Business Catalogue Layout",
+    "category": "Catalogue editorial design",
+    "description": "Clean product showcase catalogue layout pairing structured specifications with visual appeal.",
+    "images": [
+      "./images/formatted/otixliek6o3w8dlc5cho.jpg"
+    ]
+  },
+  {
+    "title": "Cosmic Gold Self-Help Cover",
+    "category": "KDP book cover design",
+    "description": "Elegant self-help/non-fiction cover with a cosmic gold aesthetic. Clean, authoritative design built to convert browsers into buyers on KDP.",
+    "images": [
+      "./images/formatted/hqddkxfcdnp0fgq51tqp.jpg"
+    ]
+  },
+  {
+    "title": "Ornamental Fantasy Interior Layout",
+    "category": "KDP fiction formatting",
+    "description": "Beautifully crafted fantasy interior with decorative borders, antique-style chapter pages, and aged parchment aesthetic. Print-ready for KDP publishing.",
+    "images": [
+      "./images/formatted/x8nzfkpg6yqaqq5aedus.jpg"
+    ]
+  },
+  {
+    "title": "Epic Fantasy Book Cover",
+    "category": "KDP fantasy cover design",
+    "description": "Bold fantasy cover with dragons, fiery landscapes, and ornate typography. Designed to dominate the fantasy genre shelf on Amazon KDP.",
+    "images": [
+      "./images/formatted/uwgchoqe1odr8o2rlwys.jpg"
+    ]
+  },
+  {
+    "title": "Classic Children's Picture Book",
+    "category": "Children’s book design",
+    "description": "Warm, classic picture book layout pairing storytelling typography with whimsical full-page illustrations.",
+    "images": [
+      "./images/formatted/xh5vxd2laxh68p0wfwkr.jpg"
+    ]
+  },
+  {
+    "title": "German Self-Help Journal Interior",
+    "category": "Journal interior formatting",
+    "description": "Guided reflection journal layout in German, formatted with prompts, checklists, and structured daily entry spaces.",
+    "images": [
+      "./images/formatted/szoz412lkyyes76rkt2n.jpg"
+    ]
+  },
+  {
+    "title": "Christian Book Cover & Layout",
+    "category": "Inspirational book design",
+    "description": "Faith-based book design incorporating reverent typography and print-ready cover presentation.",
+    "images": [
+      "./images/formatted/vmn4z5yt6aekkxqcjahq.jpg"
+    ]
+  },
+  {
+    "title": "Recipe Magazine Editorial Layout",
+    "category": "Editorial publication layout",
+    "description": "Clean culinary layout presenting step-by-step recipes, ingredient callouts, and food photography spreads.",
+    "images": [
+      "./images/formatted/znnpyil1vjwzyd6ijn4n.jpg"
+    ]
+  },
+  {
+    "title": "Hotel Trifold Brochure Design",
+    "category": "Print publication design",
+    "description": "Premium hospitality trifold brochure layout balancing architectural photography with descriptive panel copy.",
+    "images": [
+      "./images/formatted/oscr1envb43wykkvqhkg.jpg"
+    ]
+  },
+  {
+    "title": "Contemporary Publication Layout",
+    "category": "Editorial publication design",
+    "description": "Clean publication spread highlighting contemporary layout composition, balanced grids, and precise typesetting.",
+    "images": [
+      "./images/formatted/iz4ix7yuzejzobajmfvm.jpg"
+    ]
+  }
+];
+
+    function getFallbackUrl(src) {
+      const match = src.match(/([a-z0-9]{20})/);
+      if (match) return 'https://media.contra.com/image/upload/q_auto:good,w_1100/' + match[1] + '.jpg';
+      return src;
+    }
+
+    function renderCard(work, workIndex, imgIndex = 0) {
+      const img = work.images[imgIndex] || work.images[0];
+      const multi = work.images.length > 1;
+      return `
+        <article class="glass-card" style="border-radius: 1.25rem; overflow: hidden; display: flex; flex-direction: column;">
+          <button onclick="openLightbox(${workIndex}, ${imgIndex})" style="border: none; background: rgba(0,0,0,0.25); cursor: pointer; aspect-ratio: 16/10; width: 100%; overflow: hidden; position: relative; padding: 0.75rem;" aria-label="View ${work.title}">
+            <img src="${img}" onerror="const fb=getFallbackUrl('${img}');if(this.src!==fb)this.src=fb;" alt="${work.title}" loading="lazy" style="width: 100%; height: 100%; object-fit: contain; transition: transform 0.4s ease;">
+            <span style="position: absolute; bottom: 0.75rem; right: 0.75rem; width: 2.25rem; height: 2.25rem; border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass-strong); backdrop-filter: blur(12px); display: grid; place-items: center; color: var(--fg); font-size: 0.85rem;">🔍</span>
+          </button>
+          <div style="padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; flex: 1;">
+            <div>
+              <p class="badge-gold" style="font-size: 0.7rem;">${work.category}</p>
+              <h3 class="font-display" style="font-size: 1.25rem; margin-top: 0.4rem; line-height: 1.3;">${work.title}</h3>
+              ${multi ? `<p style="color: var(--primary); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-top: 0.4rem;">Sample ${imgIndex + 1} of ${work.images.length}</p>` : ''}
+              <p style="color: var(--muted); font-size: 0.85rem; line-height: 1.6; margin-top: 0.75rem;">${work.description}</p>
+            </div>
+            <button onclick="openLightbox(${workIndex}, ${imgIndex})" class="btn btn-glass btn-sm" style="margin-top: 1.25rem; align-self: flex-start;">View Sample →</button>
+          </div>
+        </article>
+      `;
+    }
+
+    // Populate Page Grid & Modal Grid
+    const pageGrid = document.getElementById('portfolio-grid');
+    const modalGrid = document.getElementById('modal-grid');
+
+    let html = '';
+    formattedWorks.forEach((work, wIdx) => {
+      work.images.forEach((img, iIdx) => {
+        html += renderCard(work, wIdx, iIdx);
+      });
+    });
+
+    if (pageGrid) pageGrid.innerHTML = html;
+    if (modalGrid) modalGrid.innerHTML = html;
+
+    // Modals
+    function openFormattedModal() {
+      document.getElementById('formatted-modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeFormattedModal() {
+      document.getElementById('formatted-modal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    let currentWorkIdx = 0;
+    let currentImgIdx = 0;
+
+    function openLightbox(workIdx, imgIdx) {
+      currentWorkIdx = workIdx;
+      currentImgIdx = imgIdx;
+      const work = formattedWorks[workIdx];
+      const img = work.images[imgIdx];
+
+      const lbImg = document.getElementById('lightbox-img');
+      lbImg.src = img;
+      lbImg.onerror = function() {
+        const fb = getFallbackUrl(img);
+        if (this.src !== fb) this.src = fb;
+      };
+
+      document.getElementById('lightbox-title').innerText = work.title;
+      document.getElementById('lightbox-counter').innerText = 'View ' + (imgIdx + 1) + ' of ' + work.images.length + ' • ' + work.category;
+
+      const thumbs = document.getElementById('lightbox-thumbnails');
+      thumbs.innerHTML = '';
+      if (work.images.length > 1) {
+        work.images.forEach((thumbImg, idx) => {
+          const btn = document.createElement('button');
+          btn.style.cssText = 'width: 44px; height: 44px; border-radius: 8px; overflow: hidden; border: 2px solid ' + (idx === imgIdx ? 'var(--primary)' : 'transparent') + '; cursor: pointer; padding: 0; background: rgba(0,0,0,0.5);';
+          btn.innerHTML = '<img src="' + thumbImg + '" style="width:100%;height:100%;object-fit:cover;">';
+          btn.onclick = () => openLightbox(workIdx, idx);
+          thumbs.appendChild(btn);
+        });
+      }
+
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      if (!document.getElementById('formatted-modal').classList.contains('active')) {
+        document.body.style.overflow = '';
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (document.getElementById('lightbox').classList.contains('active')) {
+          closeLightbox();
+        } else if (document.getElementById('formatted-modal').classList.contains('active')) {
+          closeFormattedModal();
+        }
+      }
+    });
+
+    function handleContact(e) {
+      e.preventDefault();
+      document.getElementById('contact-success').style.display = 'block';
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
