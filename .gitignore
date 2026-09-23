@@ -21,8 +21,9 @@ dist-ssr
 joy-glass-folio-main/
 scratch/
 
-# Wrangler / Cloudflare
+# Wrangler / Cloudflare / Vercel
 .wrangler/
+.vercel/
 .dev.vars
 
 # Editor directories and files
