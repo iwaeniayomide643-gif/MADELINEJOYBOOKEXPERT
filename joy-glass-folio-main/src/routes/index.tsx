@@ -13,7 +13,6 @@ import { testimonials, type Testimonial } from "@/data/testimonials";
 import { authorWebsites, type AuthorWebsiteProject } from "@/data/authorWebsites";
 import { MiniWebsiteViewer } from "@/components/author-websites/MiniWebsiteViewer";
 import { AuthorWebsiteCard } from "@/components/author-websites/AuthorWebsiteCard";
-import { CinematicVideoPlayer } from "@/components/book-launch/CinematicVideoPlayer";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
@@ -296,10 +295,16 @@ function Portfolio() {
               if (isFormatted) badgeText = `${category.label} • 30 Real Works`;
               else if (isReviews) badgeText = `${category.label} • 20 Author Reviews`;
               else if (isWebsites) badgeText = `${category.label} • 10 Web Case Studies`;
-              else if (category.id === "trailers") badgeText = `${category.label} • 6 4K Video Trailers`;
-              else if (category.id === "launch") badgeText = `${category.label} • 6 Campaign Suites`;
+              else if (isTrailersOrLaunch) badgeText = isAnimating ? "✨ Curation In Progress" : `${category.label} • Production Showcase`;
 
               const handleCardClick = () => {
+                if (isTrailersOrLaunch) {
+                  setAnimatingCardId(category.id);
+                  setTimeout(() => {
+                    setAnimatingCardId((curr) => (curr === category.id ? null : curr));
+                  }, 1200);
+                  return;
+                }
                 setSelected(category);
               };
 
@@ -313,30 +318,46 @@ function Portfolio() {
                     isFormatted && "border-primary/40 ring-1 ring-primary/20",
                     isReviews && "border-gold/30",
                     isWebsites && "border-secondary/40",
-                    isTrailersOrLaunch && "border-gold/30 hover:border-gold hover:shadow-[0_0_30px_rgba(220,179,112,0.2)]",
+                    isTrailersOrLaunch && "border-gold/20",
                     isAnimating && "scale-[0.98] border-gold ring-2 ring-gold/50 shadow-[0_0_40px_rgba(220,179,112,0.35)]"
                   )}
-                  aria-label={`Open ${category.title} workspace`}
+                  aria-label={isTrailersOrLaunch ? `${category.title} showcase` : `Open ${category.title} workspace`}
                 >
+                  {/* Subtle click shine effect when clicked */}
+                  {isAnimating && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gold/15 to-transparent animate-pulse pointer-events-none" />
+                  )}
+
                   <div className="flex h-full flex-col justify-between gap-8 sm:gap-12 relative z-10">
                     <div className="flex items-start justify-between">
-                      <span className="grid size-12 sm:size-14 place-items-center rounded-full border border-glass-border bg-glass transition-transform duration-300 group-hover:scale-110">
-                        <Icon className="size-6 sm:size-7 text-primary group-hover:text-gold transition-colors" />
+                      <span className={cn(
+                        "grid size-12 sm:size-14 place-items-center rounded-full border border-glass-border bg-glass transition-transform duration-300",
+                        isAnimating ? "scale-110 rotate-12 bg-gold/20 text-gold" : "group-hover:scale-110"
+                      )}>
+                        <Icon className={cn("size-6 sm:size-7", isAnimating ? "text-gold" : "text-primary")} />
                       </span>
                       <span className="font-display text-3xl sm:text-4xl text-foreground/15">{category.index}</span>
                     </div>
                     <div>
-                      <p className="mb-2 text-xs uppercase tracking-[0.2em] text-gold">
+                      <p className={cn(
+                        "mb-2 text-xs uppercase tracking-[0.2em] transition-colors duration-300",
+                        isAnimating ? "text-gold font-bold" : "text-gold"
+                      )}>
                         {badgeText}
                       </p>
                       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4">
                         <div>
-                          <h3 className="min-w-0 font-display text-2xl sm:text-4xl group-hover:text-gold-light transition-colors">{category.title}</h3>
+                          <h3 className="min-w-0 font-display text-2xl sm:text-4xl">{category.title}</h3>
                           <p className="mt-2 line-clamp-2 text-xs sm:text-sm text-muted-foreground">{category.summary}</p>
                         </div>
-                        <span className="flex size-10 items-center justify-center rounded-full border border-glass-border bg-glass shrink-0 transition-all duration-300 group-hover:translate-x-1 group-hover:bg-primary group-hover:text-primary-foreground">
-                          {category.id === "trailers" ? (
-                            <Play size={16} className="fill-current ml-0.5" />
+                        <span className={cn(
+                          "flex size-10 items-center justify-center rounded-full border border-glass-border bg-glass shrink-0 transition-all duration-300",
+                          isAnimating
+                            ? "bg-gold text-ink scale-110 shadow-lg"
+                            : "group-hover:translate-x-1 group-hover:bg-primary group-hover:text-primary-foreground"
+                        )}>
+                          {isTrailersOrLaunch ? (
+                            <Sparkles size={18} className={isAnimating ? "animate-spin" : ""} />
                           ) : (
                             <ArrowRight size={18} />
                           )}
@@ -658,18 +679,6 @@ function Portfolio() {
                       />
                     ))}
                 </div>
-              </div>
-            )}
-
-            {/* 4. BOOK TRAILERS & BOOK LAUNCH PROMOTION WORKSPACE */}
-            {(selected.id === "trailers" || selected.id === "launch") && (
-              <div className="mt-6">
-                <CinematicVideoPlayer
-                  onBookService={() => {
-                    setSelected(null);
-                    scrollTo("contact");
-                  }}
-                />
               </div>
             )}
           </div>
