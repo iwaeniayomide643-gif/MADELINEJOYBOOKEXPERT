@@ -129,6 +129,7 @@ function Portfolio() {
       ? (currentSampleIndex + 1) % formattedSamples.length
       : (currentSampleIndex - 1 + formattedSamples.length) % formattedSamples.length;
     const nextSample = formattedSamples[nextIndex];
+    if (!nextSample) return;
     setPreview({ workIndex: nextSample.workIndex, imageIndex: nextSample.imageIndex });
   };
 
@@ -292,7 +293,7 @@ function Portfolio() {
               const isTrailersOrLaunch = category.id === "trailers" || category.id === "launch";
               const isAnimating = animatingCardId === category.id;
 
-              let badgeText = category.label;
+              let badgeText: string = category.label;
               if (isFormatted) badgeText = `${category.label} • 30 Real Works`;
               else if (isReviews) badgeText = `${category.label} • 20 Author Reviews`;
               else if (isWebsites) badgeText = `${category.label} • 10 Web Case Studies`;
@@ -680,7 +681,7 @@ function Portfolio() {
       {preview && (() => {
         const work = formattedWorks[preview.workIndex];
         if (!work) return null;
-        const currentSrc = work.images[preview.imageIndex];
+        const currentSrc = work.images[preview.imageIndex] ?? "";
         return (
           <div
             role="dialog"
