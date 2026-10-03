@@ -37,7 +37,7 @@ export function CinematicVideoPlayer({ initialTrailerId, onBookService }: Cinema
               <Film size={12} />
               <span>4K CINEMATIC BOOK TRAILERS</span>
             </span>
-            <span className="text-xs text-muted-foreground">• 6 Master Showcase Trailers</span>
+            <span className="text-xs text-muted-foreground">• 7 Master Showcase Trailers</span>
           </div>
           <p className="text-xs sm:text-sm text-muted-foreground">
             Select any trailer below to watch the 4K cinematic launch preview directly in the player.
@@ -143,19 +143,19 @@ export function CinematicVideoPlayer({ initialTrailerId, onBookService }: Cinema
         </div>
       </div>
 
-      {/* 6 Trailers Selection Gallery */}
+      {/* 7 Trailers Selection Gallery */}
       <div className="border-t border-border pt-8 text-left space-y-4">
         <div className="flex items-center justify-between">
           <div>
             <h4 className="font-display text-xl text-white font-bold">
-              All 6 Book Trailers
+              All 7 Book Trailers
             </h4>
             <p className="text-xs text-muted-foreground">
               Click any trailer card to load and play in the master video player above.
             </p>
           </div>
           <span className="text-xs font-mono text-gold px-3 py-1 rounded-full bg-gold/10 border border-gold/20">
-            6 / 6 TRAILERS READY
+            7 / 7 TRAILERS READY
           </span>
         </div>
 

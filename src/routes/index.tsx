@@ -236,8 +236,8 @@ function Portfolio() {
           <div className="glass-card relative mx-auto max-w-[28rem] lg:max-w-none w-full rounded-3xl p-3 sm:p-4 shadow-2xl">
             <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-primary/40 shadow-2xl bg-black group">
               <iframe
-                src="https://drive.google.com/file/d/1ZgGeS7-rhUve9H5NpJCcaeSpiPzAsu17/preview"
-                title="Featured Book Trailer"
+                src="https://drive.google.com/file/d/1qKyXDM4VD2xXNsBy3JxDksmPdVgoVFCM/preview"
+                title="Featured Book Trailer — Video 1"
                 className="w-full h-full border-0 rounded-2xl"
                 allow="autoplay; encrypted-media; fullscreen"
                 allowFullScreen
@@ -315,7 +315,7 @@ function Portfolio() {
               if (isFormatted) badgeText = `${category.label} • 30 Real Works`;
               else if (isReviews) badgeText = `${category.label} • 20 Author Reviews`;
               else if (isWebsites) badgeText = `${category.label} • 10 Web Case Studies`;
-              else if (category.id === "trailers") badgeText = `${category.label} • 6 4K Video Trailers`;
+              else if (category.id === "trailers") badgeText = `${category.label} • 7 4K Video Trailers`;
               else if (category.id === "launch") badgeText = `${category.label} • 6 Campaign Suites`;
 
               const handleCardClick = () => {
