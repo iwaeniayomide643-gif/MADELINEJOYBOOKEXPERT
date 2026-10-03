@@ -164,71 +164,66 @@ export function CinematicVideoPlayer({ initialTrailerId, onBookService }: Cinema
           </span>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {bookTrailers.map((trailer, idx) => {
             const isCurrent = trailer.id === activeTrailer.id;
             return (
-              <button
+              <div
                 key={trailer.id}
-                onClick={() => handleSelectTrailer(trailer)}
-                className={`glass-card group text-left rounded-2xl overflow-hidden border transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-between ${
+                className={`glass-card group text-left rounded-3xl overflow-hidden border transition-all duration-300 flex flex-col justify-between ${
                   isCurrent
-                    ? "border-gold ring-2 ring-gold/40 shadow-[0_0_25px_rgba(220,179,112,0.25)] bg-glass-strong"
+                    ? "border-gold ring-2 ring-gold/40 shadow-[0_0_25px_rgba(214,180,119,0.25)] bg-glass-strong"
                     : "border-glass-border hover:border-gold/40"
                 }`}
               >
-                {/* Thumbnail Image with Play Badge */}
-                <div className="relative aspect-video w-full overflow-hidden bg-black">
-                  <img
-                    src={trailer.thumbnail}
-                    alt={trailer.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                {/* Embedded Real Playable Google Drive Video Player in each card */}
+                <div className="relative aspect-video w-full overflow-hidden bg-black rounded-t-2xl border-b border-glass-border">
+                  <iframe
+                    src={trailer.videoUrl}
+                    title={trailer.title}
+                    className="w-full h-full border-0"
+                    allow="autoplay; fullscreen"
+                    allowFullScreen
+                    loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-                  {/* Duration Tag */}
-                  <span className="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-[11px] font-mono text-white/90 border border-white/10">
-                    {trailer.duration}
-                  </span>
-
-                  {/* Status Overlay */}
-                  {isCurrent ? (
-                    <span className="absolute top-2 left-2 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gold text-[#140b19] text-[10px] font-bold tracking-wider uppercase shadow-lg">
-                      <Film size={12} />
-                      <span>NOW PLAYING</span>
-                    </span>
-                  ) : (
-                    <span className="absolute top-2 left-2 size-8 rounded-full bg-black/70 border border-white/20 text-white/80 group-hover:text-gold group-hover:border-gold/50 group-hover:scale-110 transition-all grid place-items-center">
-                      <Play size={14} className="ml-0.5 fill-current" />
-                    </span>
-                  )}
                 </div>
 
                 {/* Card Content */}
-                <div className="p-4 flex-1 flex flex-col justify-between space-y-2">
+                <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
                   <div>
                     <div className="flex items-center justify-between gap-1 text-[10px] uppercase font-semibold text-gold tracking-wider">
                       <span>{trailer.tag || trailer.genre}</span>
                       <span className="text-muted-foreground">Trailer #{idx + 1}</span>
                     </div>
-                    <h5 className="font-display text-base text-white font-bold leading-snug mt-1 group-hover:text-gold-light transition-colors line-clamp-1">
+                    <h5 className="font-display text-lg text-white font-bold leading-snug mt-1 group-hover:text-gold transition-colors line-clamp-1">
                       {trailer.book}
                     </h5>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-muted-foreground mt-0.5">
                       By {trailer.author}
+                    </p>
+                    <p className="text-xs leading-relaxed text-muted-foreground/90 mt-2 line-clamp-2">
+                      {trailer.description}
                     </p>
                   </div>
 
-                  <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs">
-                    <span className="text-[11px] text-muted-foreground truncate max-w-[180px]">
+                  <div className="pt-3 border-t border-border flex items-center justify-between gap-2 text-xs">
+                    <span className="text-[11px] text-muted-foreground truncate max-w-[160px]">
                       {trailer.campaignType}
                     </span>
-                    <span className={`text-xs font-semibold ${isCurrent ? "text-gold" : "text-primary group-hover:underline"}`}>
-                      {isCurrent ? "Active" : "Play Trailer →"}
-                    </span>
+                    <button
+                      onClick={() => handleSelectTrailer(trailer)}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer inline-flex items-center gap-1.5 ${
+                        isCurrent
+                          ? "bg-gold text-[#140A13] shadow-md"
+                          : "bg-glass hover:bg-gold hover:text-[#140A13] border border-glass-border text-foreground"
+                      }`}
+                    >
+                      <Film size={12} />
+                      <span>{isCurrent ? "Active in Master" : "Feature in Master ↑"}</span>
+                    </button>
                   </div>
                 </div>
-              </button>
+              </div>
             );
           })}
         </div>
