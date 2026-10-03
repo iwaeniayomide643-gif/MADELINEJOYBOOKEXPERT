@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
   ArrowDownRight, ArrowRight, BookOpen, Check, ChevronDown, ChevronLeft, ChevronRight,
-  Compass, ExternalLink, FileText, Globe2, Layers3, Menu, MessageSquareQuote,
+  Compass, ExternalLink, FileText, Film, Globe2, Layers3, Menu, MessageSquareQuote,
   PenTool, Play, Rocket, Search, Send, Sparkles, Star, X, Volume2, Video, CheckCircle2,
 } from "lucide-react";
 import { z } from "zod";
@@ -222,37 +222,61 @@ function Portfolio() {
         </div>
       </section>
 
-      {/* About Section */}
+      {/* About & Featured Trailer Section */}
       <Section id="about" eyebrow="The person behind the pages" title="Thoughtful craft, built around every book.">
-        <div className="grid items-center gap-8 lg:grid-cols-[0.75fr_1.25fr]">
-          <div className="glass-card relative mx-auto max-w-[22rem] lg:max-w-none w-full rounded-3xl p-3">
-            <img
-              loading="lazy"
-              src="/images/madeline-joy.jpg"
-              onError={(e) => {
-                e.currentTarget.src = "https://cea9a82b-7510-41be-8ff3-bd03d846d7b1.lovableproject.com/__l5e/assets-v1/0977be83-0975-4a4a-8545-03c035636a2b/madeline-joy.jpg";
-              }}
-              alt="Madeline Joy in her creative workspace"
-              className="aspect-square w-full rounded-2xl object-cover"
-            />
+        <div className="grid items-center gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+          {/* Left: Personal Portrait Frame */}
+          <div className="glass-card relative mx-auto max-w-[22rem] lg:max-w-none w-full rounded-3xl p-3 shadow-2xl">
+            <div className="relative aspect-[4/5] sm:aspect-square w-full overflow-hidden rounded-2xl border border-glass-border">
+              <img
+                loading="lazy"
+                src="/images/madeline-portrait.jpg"
+                alt="Madeline Joy in her creative workspace"
+                className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+              />
+            </div>
           </div>
-          <div className="glass-panel rounded-3xl p-6 sm:p-10">
-            <p className="font-display text-xl leading-snug sm:text-3xl">
-              “Every book has a story worth discovering. My work is to help the right readers find it.”
-            </p>
-            <div className="my-6 h-px bg-border" />
-            <p className="leading-relaxed sm:leading-7 text-muted-foreground">
-              I bring editorial care and marketing clarity together, helping authors move from manuscript to a polished, discoverable presence.
-            </p>
-            <div className={cn("grid transition-all duration-500", bioOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0")}>
-              <p className="overflow-hidden pt-4 leading-relaxed sm:leading-7 text-muted-foreground">
-                {fullBio}
+
+          {/* Right: Featured Book Trailer Showcase Card */}
+          <div className="glass-panel rounded-3xl p-6 sm:p-8 lg:p-10 flex flex-col justify-between space-y-6">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono uppercase tracking-wider mb-3">
+                <Film size={13} />
+                <span>FEATURED BOOK TRAILER</span>
+              </div>
+              <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl leading-tight font-medium text-foreground">
+                Bring the story to life beyond the page.
+              </h2>
+              <p className="mt-3 text-sm sm:text-base leading-relaxed text-muted-foreground">
+                A cinematic book trailer designed to turn a story into an experience readers can see, feel, and remember.
               </p>
             </div>
-            <Button variant="glass" className="mt-6" onClick={() => setBioOpen(!bioOpen)}>
-              {bioOpen ? "Read Less" : "Read More"}
-              <ChevronDown size={17} className={cn("transition-transform duration-300", bioOpen && "rotate-180")} />
-            </Button>
+
+            {/* Video Player Box */}
+            <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-primary/30 shadow-2xl bg-black group">
+              <iframe
+                src="https://drive.google.com/file/d/1ZgGeS7-rhUve9H5NpJCcaeSpiPzAsu17/preview"
+                title="Featured Book Trailer"
+                className="w-full h-full border-0 rounded-2xl"
+                allow="autoplay; encrypted-media; fullscreen"
+                allowFullScreen
+              />
+            </div>
+
+            {/* Trailer Details & CTA */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2 border-t border-border/50">
+              <div className="text-xs text-muted-foreground">
+                <span className="text-foreground font-medium">Cinematic Book Trailer</span> • 4K Master Launch Showcase
+              </div>
+              <Button
+                size="lg"
+                onClick={() => scrollTo("portfolio")}
+                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-primary/25 transition-all duration-300"
+              >
+                <span>Explore More Works</span>
+                <ArrowDownRight size={18} className="transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+              </Button>
+            </div>
           </div>
         </div>
       </Section>
