@@ -229,34 +229,34 @@ function Portfolio() {
         </div>
       </section>
 
-      {/* Featured Book Trailer Section — IMAGE 2: Replaced with Book Trailer Video */}
-      <Section id="about" eyebrow="Featured Book Trailer" title="Bring the story to life beyond the page.">
-        <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-          {/* Left: Book Trailer Video Player */}
-          <div className="glass-card relative mx-auto max-w-[28rem] lg:max-w-none w-full rounded-3xl p-3 sm:p-4 shadow-2xl">
+      {/* Featured Book Trailer Section — IMAGE 2: Lower-Left Video Player */}
+      <Section id="about" eyebrow="Featured Work" title="Stories brought to life through film.">
+        <div className="grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+          {/* Lower Left: Featured Book Trailer Video Player */}
+          <div className="glass-card relative mx-auto max-w-[32rem] lg:max-w-none w-full rounded-3xl p-3 sm:p-4 shadow-2xl">
             <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-primary/40 shadow-2xl bg-black group">
               <iframe
                 src="https://drive.google.com/file/d/1qKyXDM4VD2xXNsBy3JxDksmPdVgoVFCM/preview"
-                title="Featured Book Trailer — Video 1"
+                title="Featured Book Trailer"
                 className="w-full h-full border-0 rounded-2xl"
-                allow="autoplay; encrypted-media; fullscreen"
+                allow="autoplay; fullscreen"
                 allowFullScreen
               />
             </div>
           </div>
 
-          {/* Right: Copy beside the Book Trailer */}
+          {/* Lower Right: Text beside the Featured Video */}
           <div className="glass-panel rounded-3xl p-6 sm:p-8 lg:p-10 flex flex-col justify-between space-y-6">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono uppercase tracking-wider mb-3">
                 <Film size={13} />
-                <span>FEATURED BOOK TRAILER</span>
+                <span>FEATURED WORK</span>
               </div>
               <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl leading-tight font-medium text-foreground">
-                Bring the story to life beyond the page.
+                Stories brought to life through film.
               </h2>
               <p className="mt-4 text-sm sm:text-base leading-relaxed sm:leading-7 text-muted-foreground">
-                Cinematic book trailers created to turn powerful stories into visual experiences that capture attention and give readers a reason to discover the book.
+                I create cinematic book trailers that transform stories into compelling visual experiences designed to capture attention and connect books with their readers.
               </p>
             </div>
 
@@ -267,7 +267,7 @@ function Portfolio() {
                 onClick={openTrailersPortfolio}
                 className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-primary/25 transition-all duration-300 font-semibold uppercase tracking-wider text-xs sm:text-sm"
               >
-                <span>EXPLORE MORE WORKS</span>
+                <span>Explore More Works</span>
                 <ArrowDownRight size={18} className="transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
               </Button>
             </div>
