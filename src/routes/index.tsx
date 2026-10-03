@@ -236,7 +236,7 @@ function Portfolio() {
           <div className="glass-card relative mx-auto max-w-[32rem] lg:max-w-none w-full rounded-3xl p-3 sm:p-4 shadow-2xl">
             <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-primary/40 shadow-2xl bg-black group">
               <iframe
-                src="https://drive.google.com/file/d/1qKyXDM4VD2xXNsBy3JxDksmPdVgoVFCM/preview"
+                src="https://drive.google.com/file/d/1ZgGeS7-rhUve9H5NpJCcaeSpiPzAsu17/preview"
                 title="Featured Book Trailer"
                 className="w-full h-full border-0 rounded-2xl"
                 allow="autoplay; fullscreen"
