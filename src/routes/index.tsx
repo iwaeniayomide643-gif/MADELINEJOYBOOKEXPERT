@@ -133,6 +133,16 @@ function Portfolio() {
     setPreview({ workIndex: nextSample.workIndex, imageIndex: nextSample.imageIndex });
   };
 
+  const openTrailersPortfolio = () => {
+    scrollTo("portfolio");
+    const trailersCategory = categories.find((c) => c.id === "trailers");
+    if (trailersCategory) {
+      setTimeout(() => {
+        setSelected(trailersCategory);
+      }, 500);
+    }
+  };
+
   return (
     <main className="relative min-h-screen w-full overflow-x-hidden bg-background text-foreground">
       <Background />
@@ -141,7 +151,7 @@ function Portfolio() {
       <header className="fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-6 sm:pt-4">
         <nav aria-label="Primary navigation" className="glass-panel mx-auto flex max-w-6xl items-center justify-between rounded-full px-4 py-2.5 sm:px-6 sm:py-3">
           <button onClick={() => scrollTo("home")} className="min-w-0 text-left transition-opacity hover:opacity-80" aria-label="Go to home">
-            <span className="font-display text-lg font-semibold tracking-tight sm:text-xl">Madeline Joy</span>
+            <span className="font-display text-lg font-semibold tracking-tight sm:text-xl">IWAENI AYOMIDE</span>
           </button>
           <div className="hidden items-center gap-1 md:flex">
             {navItems.map((item) => (
@@ -172,7 +182,7 @@ function Portfolio() {
         </div>
       </header>
 
-      {/* Hero Section */}
+      {/* Hero Section — IMAGE 1: Top Hero Personal Image */}
       <section id="home" className="relative mx-auto grid min-h-[92svh] max-w-7xl items-center gap-10 px-4 pb-16 pt-28 sm:px-6 sm:pt-32 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 lg:px-10">
         <div className="gentle-float relative mx-auto w-full max-w-[21rem] sm:max-w-[26rem] lg:max-w-[30rem] animate-in fade-in slide-in-from-left-6 duration-1000">
           <div className="glass-panel relative rounded-[2rem] p-3 sm:p-4">
@@ -180,12 +190,9 @@ function Portfolio() {
               Books • Brands • Beyond
             </div>
             <img
-              src="/images/madeline-joy.jpg"
-              onError={(e) => {
-                e.currentTarget.src = "https://cea9a82b-7510-41be-8ff3-bd03d846d7b1.lovableproject.com/__l5e/assets-v1/0977be83-0975-4a4a-8545-03c035636a2b/madeline-joy.jpg";
-              }}
-              alt="Madeline Joy, book marketing and author-services specialist"
-              className="aspect-[4/5] w-full rounded-[1.4rem] object-cover object-center"
+              src="/images/madeline-portrait.jpg"
+              alt="Iwaeni Ayomide, book marketing and author-services specialist"
+              className="aspect-[4/5] w-full rounded-[1.4rem] object-cover object-center shadow-2xl"
               fetchPriority="high"
             />
             <div className="absolute inset-x-5 sm:inset-x-8 bottom-5 sm:bottom-8 rounded-2xl border border-glass-border bg-ink/70 p-3 sm:p-4 backdrop-blur-xl">
@@ -199,10 +206,10 @@ function Portfolio() {
             Book Marketing & Author Services
           </p>
           <h1 className="font-display text-5xl leading-[0.95] font-medium sm:text-7xl lg:text-[6.5rem]">
-            Madeline<br /><span className="italic text-primary">Joy</span>
+            IWAENI<br /><span className="italic text-primary">AYOMIDE</span>
           </h1>
           <p className="mt-6 max-w-xl text-base sm:text-lg leading-relaxed sm:leading-8 text-muted-foreground">
-            I’m Madeline Joy, a book services specialist helping authors present, promote, and grow their books. I specialize in book promotion, book trailers, author websites, author spotlights, editing, proofreading, formatting, SEO, and book marketing.
+            I’m Iwaeni Ayomide, a book services specialist helping authors present, promote, and grow their books. I specialize in book promotion, book trailers, author websites, author spotlights, editing, proofreading, formatting, SEO, and book marketing.
           </p>
           <div className={cn("grid transition-all duration-500", bioOpen ? "mt-5 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0")}>
             <div className="overflow-hidden">
@@ -222,22 +229,23 @@ function Portfolio() {
         </div>
       </section>
 
-      {/* About & Featured Trailer Section */}
-      <Section id="about" eyebrow="The person behind the pages" title="Thoughtful craft, built around every book.">
-        <div className="grid items-center gap-8 lg:grid-cols-[0.85fr_1.15fr]">
-          {/* Left: Personal Portrait Frame */}
-          <div className="glass-card relative mx-auto max-w-[22rem] lg:max-w-none w-full rounded-3xl p-3 shadow-2xl">
-            <div className="relative aspect-[4/5] sm:aspect-square w-full overflow-hidden rounded-2xl border border-glass-border">
-              <img
-                loading="lazy"
-                src="/images/madeline-portrait.jpg"
-                alt="Madeline Joy in her creative workspace"
-                className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+      {/* Featured Book Trailer Section — IMAGE 2: Replaced with Book Trailer Video */}
+      <Section id="about" eyebrow="Featured Book Trailer" title="Bring the story to life beyond the page.">
+        <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+          {/* Left: Book Trailer Video Player */}
+          <div className="glass-card relative mx-auto max-w-[28rem] lg:max-w-none w-full rounded-3xl p-3 sm:p-4 shadow-2xl">
+            <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-primary/40 shadow-2xl bg-black group">
+              <iframe
+                src="https://drive.google.com/file/d/1ZgGeS7-rhUve9H5NpJCcaeSpiPzAsu17/preview"
+                title="Featured Book Trailer"
+                className="w-full h-full border-0 rounded-2xl"
+                allow="autoplay; encrypted-media; fullscreen"
+                allowFullScreen
               />
             </div>
           </div>
 
-          {/* Right: Featured Book Trailer Showcase Card */}
+          {/* Right: Copy beside the Book Trailer */}
           <div className="glass-panel rounded-3xl p-6 sm:p-8 lg:p-10 flex flex-col justify-between space-y-6">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono uppercase tracking-wider mb-3">
@@ -247,33 +255,19 @@ function Portfolio() {
               <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl leading-tight font-medium text-foreground">
                 Bring the story to life beyond the page.
               </h2>
-              <p className="mt-3 text-sm sm:text-base leading-relaxed text-muted-foreground">
-                A cinematic book trailer designed to turn a story into an experience readers can see, feel, and remember.
+              <p className="mt-4 text-sm sm:text-base leading-relaxed sm:leading-7 text-muted-foreground">
+                Cinematic book trailers created to turn powerful stories into visual experiences that capture attention and give readers a reason to discover the book.
               </p>
             </div>
 
-            {/* Video Player Box */}
-            <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-primary/30 shadow-2xl bg-black group">
-              <iframe
-                src="https://drive.google.com/file/d/1ZgGeS7-rhUve9H5NpJCcaeSpiPzAsu17/preview"
-                title="Featured Book Trailer"
-                className="w-full h-full border-0 rounded-2xl"
-                allow="autoplay; encrypted-media; fullscreen"
-                allowFullScreen
-              />
-            </div>
-
-            {/* Trailer Details & CTA */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2 border-t border-border/50">
-              <div className="text-xs text-muted-foreground">
-                <span className="text-foreground font-medium">Cinematic Book Trailer</span> • 4K Master Launch Showcase
-              </div>
+            {/* CTA Button */}
+            <div className="pt-2 border-t border-border/50">
               <Button
                 size="lg"
-                onClick={() => scrollTo("portfolio")}
-                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-primary/25 transition-all duration-300"
+                onClick={openTrailersPortfolio}
+                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-primary/25 transition-all duration-300 font-semibold uppercase tracking-wider text-xs sm:text-sm"
               >
-                <span>Explore More Works</span>
+                <span>EXPLORE MORE WORKS</span>
                 <ArrowDownRight size={18} className="transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
               </Button>
             </div>
