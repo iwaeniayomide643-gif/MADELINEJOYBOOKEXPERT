@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Play, Film, CheckCircle2, AlertCircle, ExternalLink, Sparkles, BookOpen, Layers } from "lucide-react";
 import { bookTrailers, type BookTrailerItem } from "@/data/bookLaunchProjects";
 
@@ -13,6 +13,7 @@ export function CinematicVideoPlayer({ initialTrailerId, onBookService }: Cinema
   );
   const [hasError, setHasError] = useState<Record<string, boolean>>({});
   const [isLoading, setIsLoading] = useState(true);
+  const playerContainerRef = useRef<HTMLDivElement>(null);
 
   const activeTrailer =
     bookTrailers.find((t) => t.id === selectedTrailerId) || bookTrailers[0];
@@ -20,6 +21,7 @@ export function CinematicVideoPlayer({ initialTrailerId, onBookService }: Cinema
   const handleSelectTrailer = (trailer: BookTrailerItem) => {
     setSelectedTrailerId(trailer.id);
     setIsLoading(true);
+    playerContainerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   const handleIframeError = (id: string) => {
@@ -46,7 +48,10 @@ export function CinematicVideoPlayer({ initialTrailerId, onBookService }: Cinema
       </div>
 
       {/* Main Cinematic Video Player Box */}
-      <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/40 shadow-2xl bg-black flex flex-col justify-between group">
+      <div
+        ref={playerContainerRef}
+        className="relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/40 shadow-2xl bg-black flex flex-col justify-between group"
+      >
         {hasError[activeTrailer.id] ? (
           /* Error Fallback State */
           <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center bg-black/95">
